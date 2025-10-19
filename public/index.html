@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HridoyTV Player</title>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<style>
-  html,body {height:100%;margin:0;background:#000;display:flex;justify-content:center;align-items:center;}
-  video {width:90%;max-width:720px;border-radius:8px;}
-</style>
-</head>
-<body>
-
 <video id="player" controls autoplay muted playsinline></video>
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
   const video = document.getElementById('player');
   const videoSrc = '/api/proxy/sony-aath.m3u8';
 
-  if (Hls.isSupported()) {
+  if(Hls.isSupported()){
     const hls = new Hls();
     hls.loadSource(videoSrc);
     hls.attachMedia(video);
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  } else if(video.canPlayType('application/vnd.apple.mpegurl')){
     video.src = videoSrc;
   }
 </script>
-
-</body>
-</html>
