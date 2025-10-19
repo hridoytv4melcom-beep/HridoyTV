@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>My Cloudflare Pages Project</title>
+    <title>গোপন স্ট্রিমিং</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-  <h1>Hello from Cloudflare Pages!</h1>
-  <p>This is the first file to make the branch connectable.</p>
+    <h1>আমার লুকানো ভিডিও</h1>
+    <video id="videoElement" controls style="width: 80%;"></video>
+
+    <script>
+        const video = document.getElementById('videoElement');
+        
+        // **** গুরুত্বপূর্ণ: এখানে আমরা পোস্টম্যানের ঠিকানা দিচ্ছি, আসল M3U8 ঠিকানা নয় ****
+        const postmanAddress = '/api/stream'; 
+
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(postmanAddress); // পোস্টম্যানের ঠিকানায় ডেটা চাইছি
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            // Safari/iOS-এর জন্য
+            video.src = postmanAddress;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
+        }
+        
+        console.log("ব্রাউজার শুধু এই ঠিকানাটি দেখবে:", postmanAddress);
+    </script>
 </body>
 </html>
