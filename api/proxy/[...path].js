@@ -1,12 +1,12 @@
 export default async function handler(req, res) {
   try {
-    // Catch-all route: [...path].js
     const pathParts = req.query.path || [];
     const fileName = pathParts.join('/');
 
-    // Mapping
+    // Mapping সব চ্যানেল
     const mapping = {
-      'sony-aath.m3u8': 'https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts'
+      'sony-aath.m3u8': 'https://live20.bozztv.com/giatvplayout7/giatv-209611/tracks-v1a1/mono.ts',
+      'cartoon.m3u8': 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     };
 
     const upstream = mapping[fileName];
