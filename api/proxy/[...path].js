@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     let body = await upstreamResp.text();
 
-    // Rewrite all .ts URLs to go through proxy
+    // Manifest rewrite: সব .ts URL proxy route দিয়ে
     body = body.replace(/(https?:\/\/[^\s]+\.ts)/g, (match) => {
       return `/api/proxy/?url=${encodeURIComponent(match)}`;
     });
