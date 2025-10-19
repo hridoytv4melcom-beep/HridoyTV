@@ -1,9 +1,23 @@
-<video id="player" controls autoplay muted playsinline></video>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HridoyTV Player</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+  html,body {height:100%;margin:0;background:#000;display:flex;justify-content:center;align-items:center;}
+  video {width:90%;max-width:720px;border-radius:8px;}
+</style>
+</head>
+<body>
+
+<video id="player" controls autoplay muted playsinline></video>
+
 <script>
   const video = document.getElementById('player');
 
-  // Cartoon channel proxied URL
+  // Change channel here
   const videoSrc = '/api/proxy/cartoon.m3u8';
 
   if(Hls.isSupported()){
@@ -14,3 +28,6 @@
     video.src = videoSrc;
   }
 </script>
+
+</body>
+</html>
