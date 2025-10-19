@@ -3,30 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HridoyTV Player</title>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<title>HridoyTV YouTube Player</title>
 <style>
-  html,body {height:100%;margin:0;background:#000;display:flex;justify-content:center;align-items:center;}
-  video {width:90%;max-width:720px;border-radius:8px;}
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+  }
+  iframe {
+    width: 90%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 8px;
+  }
 </style>
 </head>
 <body>
 
-<video id="player" controls autoplay muted playsinline></video>
-
-<script>
-  const video = document.getElementById('player');
-  const videoSrc = 'https://hridoy-tv.vercel.app/api/proxy/sony-aath.m3u8';
-
-  if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.ERROR, (ev,data)=>console.error('HLS error',data));
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = videoSrc;
-  }
-</script>
+<!-- YouTube Embed -->
+<iframe 
+    src="https://www.youtube.com/embed/ZvlHMALUBMg?autoplay=1&mute=1&playsinline=1" 
+    allow="autoplay; encrypted-media" 
+    allowfullscreen>
+</iframe>
 
 </body>
 </html>
