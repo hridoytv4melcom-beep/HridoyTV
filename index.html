@@ -1,44 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>HridoyTV Player</title>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  video {
-    width: 90%;
-    max-width: 700px;
-    border-radius: 10px;
-    outline: none;
-  }
+  html,body{height:100%;margin:0;background:#000;display:flex;align-items:center;justify-content:center}
+  video{width:90%;max-width:720px;border-radius:8px}
 </style>
 </head>
 <body>
   <video id="player" controls autoplay muted playsinline></video>
-
   <script>
     const video = document.getElementById('player');
-    // Cloudflare Worker URL
-    const videoSrc = 'https://hridoytv-stream.hridoytv-4mel-com.workers.dev/sony-aath.m3u8';
+    const src = 'https://<REPLACE_WITH_VERCEL_PROJECT>.vercel.app/api/sony-aath.m3u8';
 
     if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(videoSrc);
+      hls.loadSource(src);
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+      hls.on(Hls.Events.ERROR, (_, data) => console.error('hls error', data));
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
+      video.src = src;
       video.addEventListener('loadedmetadata', () => video.play());
+    } else {
+      alert('আপনার ব্রাউজার এই ভিডিও প্লে করতে পারছে না।');
     }
   </script>
 </body>
