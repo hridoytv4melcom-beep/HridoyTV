@@ -2,7 +2,9 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
   const video = document.getElementById('player');
-  const videoSrc = '/api/proxy/sony-aath.m3u8';
+
+  // Cartoon channel proxied URL
+  const videoSrc = '/api/proxy/cartoon.m3u8';
 
   if(Hls.isSupported()){
     const hls = new Hls();
